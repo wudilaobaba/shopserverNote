@@ -1,0 +1,20 @@
+调用小程序获取token的方式：
+  step01.在项目的application.yml中配置wx
+  step02.在Service层增加 WxAuthenticationService类，并在TokenController中调用
+  step03.一系列生成token的工具方法看util
+
+
+拦截：
+  拦截的是HTTP请求：
+  三种拦截方式：
+    filter
+    interceptor
+    aop
+
+
+银行家算法：
+  四舍六入五考虑
+  五后非空就进一
+  五后为空看奇偶
+  五前为偶应舍去
+  五前为一要进一

@@ -1,0 +1,5 @@
+step01.
+  将whj文件夹(自定义组件)拷贝在小程序项目中的组件components目录下
+  whj组件的properties属性的data数据必须叫"data"
+step02.
+  在页面clissic中查看其具体使用方法

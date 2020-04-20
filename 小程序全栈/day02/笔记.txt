@@ -1,0 +1,68 @@
+使用async和await进行异步函数变为同步函数：
+  当调用由async修饰的方法fun的时候，必须在fun调用的前面加await  await fun()
+
+
+
+***注意：
+  promisic中的两个回调函数必须与方法xxx的回调参数名一致！！！！！
+使用util/index.js中的promisic方法将其他“有回调函数的异步方法”转化为”没有回调函数的同步方法“
+使用方式如下：
+  step01：之前是有回调函数的异步方法：
+    xxx(a,b,callback1,callback2){
+      if(a.age==b.age){
+        callback1("right")
+      }else{
+        callback2("wrong")
+      }
+    }
+  step02.根据util/index.js中的promisic方法将上述方法改造为：
+    xxx({
+      a,
+      b,
+      callback1, //符合逻辑则调用
+      callback2  //不符合逻辑则调用
+    }){
+      if(a.age==b.age){
+        callback1("right"); //将符合逻辑的结果写在callback1的参数中，会自动返回
+      }else{
+        callback2("wrong"); //将不符合逻辑的结果写在callback2的参数中，会自动返回
+      }
+    }
+  step03.使用util/index.js中的promisic
+    import {promisic} from "../../util"
+    async get(){
+      let r = await promisic(xxx)({a:{age:12}},{b:{age:12}});
+      console.log(r)
+    }
+
+  注意：加await是为了等待此函数的调用结果，后续要获取到返回结果就加await,否则没必要加await
+       加async是为了将结果强制返回成promise，加async可以将任何的返回结果包装成promise
+       小程序中组件的属性必须是中划线相连接的，不能使用驼峰，组件属性可以使用驼峰，但是使用的时候必须转为中划线
+
+
+建议将第三方组件在项目中的app.json中进行引入：
+"usingComponents": {
+  "l-grid": "/miniprogram_npm/lin-ui/grid/index",
+  "l-grid-item": "/miniprogram_npm/lin-ui/grid-item/index"
+}
+
+数组的过滤：
+let themes = [{
+  name:"t-1",
+  age:"23"
+},{
+  name:"t-1",
+  age:"2"
+}]
+let arr = themes.find(t=>t.name==="t-1");
+
+小程序的wxs:
+  在wxml中引入以下js文件
+  <wxs src="../../miniprogram_npm/lin-ui/filter/string.wxs" module="s"/>
+就相当于是一个js文件，但是这个js文件必须是es5的语法
+
+
+组件的外部样式类：
+  step01.在组件的js中写：externalClasses:["whj-class"],
+  step02.在组件的wxml中的最外层标签的class中添加 whj-class
+  step03.页面中使用了自定义组件，在自定义组件中加whj-class="xxx"

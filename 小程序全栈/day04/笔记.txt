@@ -1,0 +1,68 @@
+JAVA开发流程
+1.下载JDK,一键安装
+2.使用homebrew安装maven: brew install maven
+3.初始化springboot项目,两种方式：
+  01. https://start.spring.io/
+      通过springboot官网，看图“创建springboot项目方式01.png”  最后点击下载并解压
+      打开IDEA 点击Open打开解压后的文件夹
+  02. 使用IDEA创建新项目：
+      选择Spring initializr
+      然后看图即可
+  建议使用第二种！
+
+4.修改项目的端口号：在项目的src/main/resources/application.properties中添加：server.port=8999
+5.运行项目：顶部的RUN,选择RunxxxApplication即可
+
+
+
+springboot 依赖注入步骤
+  方式一：
+    在A类上面加注解：@Component
+    B类中使用A类：通过属性的方式引入：
+      @Autowired
+      private A a;
+  方式二：
+    在A类上面加注解：@Component
+    B类中使用A类：通过构造函数的方式引入
+    private A a; //不加@Autowired注解
+    public B(A a){
+       this.a = a;
+    }
+
+四大注解：
+  @Component
+
+  @Service
+  @Controller
+  @Repository
+
+  @Configuration
+
+所有加上@Component注解的类，在springboot启动的时候就会立即进行实例化，
+只有在调用方类和自己类上加上@Lazy后，才会延迟实例化
+加了@Lazy后，只有访问接口的时候才会被实例化
+
+@Configuration注解的使用看：HeroConfiguration.class  可以解决属性赋值问题
+其实：@Configuration注解就相当于以前在配置xml文件中的bean,
+     所以，写在HeroConfiguration.class中的@Bean的类上禁止加任何注解！！！！！！！！！
+@Configuration配置类实际上是要解决以下两个变化混合的情况：比如mysql和oracle
+  1.制定一个Interface，然后用多个类实现一个Interfa
+  2.一个类，属性，解决变化。Interface
+
+
+
+@ComponentScan注解是写在ShopserverApplication中的，用来启动容器
+@ComponentScan("com.lin")
+
+
+策略模式的变化方案：
+1.byname 切换bean name
+2.@Qualifier 指定bean
+3.有选择的只注入一个bean，注释掉bean上的@Component注解
+4.在类上使用@Primary，优先加载该类,但是必须只能有一个类上有该注解
+5.条件注解 @Conditional
+  自定义条件注解
+    @Conditional + Condition
+内置的成品条件注解：
+  @ConditionOnproperty
+  @ConditionOnBean

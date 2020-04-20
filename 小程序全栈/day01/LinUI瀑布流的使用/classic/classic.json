@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "v-whj":"/components/whj/index",
+    "water-flow":"/miniprogram_npm/lin-ui/water-flow/index"
+  }
+}

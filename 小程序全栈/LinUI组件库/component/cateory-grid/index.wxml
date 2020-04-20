@@ -1,0 +1,39 @@
+<view class="container">
+  <l-grid row-num="3" class="inner-container">
+    <block wx:for="{{grid}}" wx:key="id">
+      <l-grid-item key="{{index}}" slot="{{index}}">
+          <view class="grid-item">
+            <image class="img" src="{{item.img}}"/>
+            <text class="text">{{item.title}}</text>
+          </view>
+      </l-grid-item>
+    </block>
+  </l-grid>
+</view>
+
+
+
+.container{
+  height: 320rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.inner-container{
+  height: 300rpx;
+  width: 730rpx;
+  border: 1px dashed #DCEBE6;
+}
+.grid-item{
+  width: 200rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img{
+  height: 60rpx;
+  width: 60rpx;
+}

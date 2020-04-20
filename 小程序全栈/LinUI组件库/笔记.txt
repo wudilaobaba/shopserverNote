@@ -1,0 +1,66 @@
+
+宫格组件：cateory-grid
+  项目的app.json中引入
+  "usingComponents": {
+    "l-grid": "/miniprogram_npm/lin-ui/grid/index",
+    "l-grid-item": "/miniprogram_npm/lin-ui/grid-item/index"
+  }
+
+价格组件：
+  项目的app.json中引入
+  "usingComponents": {
+    "l-price": "/miniprogram_npm/lin-ui/price/index"
+  }
+  <l-price
+    autofix
+    color="#157658"
+    value="{{item.price}}"
+    unit="$"
+    l-unit-class="price-unit"
+    l-value-class="price-value"
+  />
+  小程序的外部样式类要加 !important
+  .price-unit{
+    font-size: 32rpx !important;
+  }
+  .price-value{
+    font-size: 32rpx !important;
+  }
+
+标签组件：
+<block wx:for="{{tags}}">
+  <l-tag type="reading" l-class="l-tag" size="super-mini">{{item}}</l-tag>
+  <!-- type="reading"可以让标签的内容自适应宽度 -->
+</block>
+
+LoadMore 加载更多组件
+"l-loadmore":"/miniprogram_npm/lin-ui/loadmore/index"
+<l-loadmore show type="{{loadingType}}">  <!-- type的默认值是"loading" -->
+  <view slot="content" class="container">
+
+  </view>
+</l-loadmore>
+项目的app.json中的window中写：
+onReachBottomDistance:100  页底的高度
+页面中：
+loadingType
+async onReachBottom() {
+   const data = await this.data.pagingObj.getMoreData();;
+   if(!data){
+     return;
+   }
+   wx.lin.renderWaterFlow(data.items);
+   if(!data.moreData){
+     this.setData({
+       loadingType:'end'
+     })
+   }
+ },
+
+
+ 小程序给组件设置值：data-pid="{{data.id}}
+ <view class="container" bind:tap="onItemTap" data-pid="{{data.id}}"/>
+ onItemTap(event){
+  const pid = event.currentTarget.dataset.pid; //获取组件上的自定义的属性pid的值
+  console.log(pid)
+}

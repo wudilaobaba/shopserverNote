@@ -1,0 +1,30 @@
+小程序轮播图组件：
+  <swiper class="swiper-img">
+    <block wx:for="{{bannerB.items}}" wx:key="id">
+      <swiper-item>
+        <image class="swiper-img" src="{{item.img}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  .swiper-img{
+    height: 360rpx;
+    width: 100%;
+  }
+
+小程序scroll-view组件：
+<scroll-view scroll-x class="scroll-view">
+  <view class="inner"> <!-- 在这里写flex布局 -->
+    <block wx:for="{{supList}}" wx:key="id">
+      <view class="spu-container">
+        <image class="spu-img" src="{{item.img}}"></image>
+        <l-price
+          color="#157658"
+          value="{{item.price}}"
+          l-unit-class="price-unit"
+          l-value-class="price-value"
+        />
+        <text>{{item.title}}</text>
+      </view>
+    </block>
+  </view>
+</scroll-view>

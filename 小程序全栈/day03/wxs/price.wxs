@@ -1,0 +1,38 @@
+function mainPrice(price,discountPrice){
+  if (!discountPrice){
+    return price
+  }else{
+    return discountPrice
+  }
+}
+function slashedPrice(price, discountPrice){
+  if (discountPrice) {
+    return price
+  }else{
+    return
+  }
+}
+module.exports = {
+  mainPrice: mainPrice,
+  slashedPrice: slashedPrice
+}
+
+
+
+小程序页面中活动到底部的事件：
+onReachBottom(){//滑动到底部的数据
+
+},
+
+
+图片加载事件：
+<image style="width:{{w}}rpx;height:{{h}}rpx" bind:load="onImgLoad" mode="widthFix" src="{{data.img}}"></image>
+methods: {
+  onImgLoad(event){
+    const {width,height} = event.detail;
+    this.setData({
+      w:340,
+      h:340*height/width
+    })
+  }
+}

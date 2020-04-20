@@ -1,0 +1,35 @@
+数据库一对多：Banner和BannerItem
+
+数据库多对多：Theme和Spu
+
+
+
+ORM就是以面向对象的思想看待数据
+
+
+使用命令行倒入.sql文件：source /Users/pc/Desktop/missyou-v1.sql
+
+使用IDEA将表转换成模型类：
+  View - Tool Windows - Database - 点击加号 - Data Source - Mysql
+  填写域名/端口/账号/密码/数据库名称
+  点击Test Connection按钮，可测试是否连接成功
+  Apply - OK - 刷新右侧Database
+  然后：
+  File - Project Structure - Modules - 右键项目名 - Add - JPA - 下方Default JPA - 选择Hibernate - Apply - OK
+  然后：
+  View - Tool Windows - Persistence
+  在Persistence面板中右键项目名 - Generate Persistence Mapping - By Database Schema - Choose Data Source - Package(将模型放在哪个包下) - 勾选要导入的表 - OK
+
+
+
+springboot访问静态资源：
+  <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+  </dependency>
+  将静态资源放在static目录下:
+  访问：http://localhost:8999/imgs/222.jpeg
+
+
+在项目的test目录下进行单元测试：
+  

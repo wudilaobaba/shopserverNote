@@ -1,0 +1,44 @@
+appKey:9cCrZsHIi3wdAOfN
+
+LinUI文档：
+http://doc.mini.7yue.pro/start/
+http://doc.mini.7yue.pro/component/layout/water-flow.html //瀑布流
+https://github.com/TaleLin/lin-ui
+
+项目API文档：
+https://course.7yue.pro/lin/sleeve/
+
+建议将小程序自带的app.wxss中的内容改为：使得所有页面的底色改变
+  page{
+    background-color: #f5f5f5;
+  }
+
+将所有image设置display:flex
+
+小程序也可以使用npm的形式进行编码：
+  step01.在小程序的根目录中 npm init
+  step02.使用 npm install 来下载需要的包
+  step03.点击工具-构建npm
+
+开发前，在小程序工具中设置以下：
+  设置-项目设置-按照"小程序设置.png"的方式进行打勾
+
+小程序原生请求：(完整版)
+  wx.request({
+    url: 'http://se.7yue.pro/v1/theme/by/names',
+    method:"GET",
+    //GET方式会将下面的data数据放在url地址的后面作为参数
+    //POST方式会将下面的data数据放在body体中进行数据发送
+    data:{
+      names:"t-1, t-2",
+    },
+    header:{
+      appkey: "9cCrZsHIi3wdAOfN"
+    },
+    success(res){
+      console.log(res)
+    },
+    fail(err){//服务器未开启 或 前端断网
+      console.log(err)
+    }
+  })

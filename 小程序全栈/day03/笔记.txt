@@ -1,0 +1,37 @@
+组件的属性监听器：监听banner属性
+observers:{
+  'banner': function (banner){
+  if(!banner){
+    return
+  }
+  if (banner.items===0){
+    return
+  }
+  const leftItem = banner.items.find(item=>item.name==="left")
+  const rightTopItem = banner.items.find(item => item.name === "right-top")
+  const rightBottomItem = banner.items.find(item => item.name === "right-bottom")
+  this.setData({
+    leftItem,
+    rightTopItem,
+    rightBottomItem
+  })
+}
+
+可以一次监听多个属性：
+observers:{
+  'banner,imag': function (banner,imag){
+}
+
+
+小程序的点击态：
+  在需要点击的外面包裹一个view 将该view上加hover-class="xxx" 自行编写.xxx的css样式
+  <view hover-class="rect-hover" hover-stay-time="200">
+    <image class="left" src="{{leftItem.img}}"></image>
+  </view>
+把所有共用的样式统一定义在一个wxss/whj.wxss文件中
+
+
+自己写小程序的.wxs文件
+见目录中wxs中的,最后要导出
+使用时导入：在wxml中导入：<wxs src="../../wxs/price.wxs" module="p"></wxs>
+p就是导出的对象，使用：p.mainPrice(12,55)
